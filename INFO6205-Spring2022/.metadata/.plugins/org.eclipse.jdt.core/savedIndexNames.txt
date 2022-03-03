@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+/Users/weiyi/Desktop/INFO6205/INFO6205-Spring2022/.metadata/.plugins/org.eclipse.jdt.core
+1865797976.index
+2056331895.index
+2992418240.index
+12845994.index
+1225423866.index
