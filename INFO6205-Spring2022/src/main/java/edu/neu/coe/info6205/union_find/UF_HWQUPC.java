@@ -212,20 +212,36 @@ public class UF_HWQUPC implements UF {
             int p = random.nextInt(n);
             int q = random.nextInt(n);
             u.connect(p,q);
-            pairs[]
+            pairs[p] = p;
+            pairs[q] = q;
+            m++;
         }
-        for(int i=0; i<k; i++) {
-
+        for(int i=0; i<n-1; i++) {
+            if(!u.connected(pairs[i], pairs[i+1])) {
+                m++;
+                u.union(pairs[i], pairs[i+1]);
+            }
         }
-
-
         return m;
     }
 
     public static void main(String[] args) {
-        int n = 1000;
-        int m = count(n);
-        System.out.println(n+" "+m);
+        int[] nums = new int[50];
+        Random random = new Random();
+        for(int k=0; k<50; k++) {
+            int n = random.nextInt(500);
+            nums[k] = n;
+        }
+        Arrays.sort(nums);
+        for(int i=0; i<nums.length; i++) {
+            int count_num = 0;
+            for(int j=0; j<100; j++) {
+                int m = count(nums[i]);
+                count_num += m;
+            }
+            int num = (int) Math.round(count_num/100);
+            System.out.println(nums[i] + " " + num);
+        }
     }
 
 }
