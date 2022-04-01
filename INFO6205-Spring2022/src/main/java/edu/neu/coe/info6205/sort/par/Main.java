@@ -17,10 +17,17 @@ import java.util.concurrent.ForkJoinPool;
 public class Main {
 
     public static void main(String[] args) {
+        int size = 200000;
         processArgs(args);
-        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+        System.out.println("Size of Array:" + size);
+        int threadCount = 16;
+        ForkJoinPool myPool = new ForkJoinPool(threadCount);
+//        CompletableFuture cf = CompletableFuture.supplyAsync(mySup, myPool);
+        System.out.println("Degree of parallelism: " + myPool.getParallelism());
         Random random = new Random();
-        int[] array = new int[2000000];
+        //change the size of array to some other big integers
+//        int[] array = new int[2000000];
+        int[] array = new int[size];
         ArrayList<Long> timeList = new ArrayList<>();
         for (int j = 50; j < 100; j++) {
             ParSort.cutoff = 10000 * (j + 1);
@@ -29,7 +36,7 @@ public class Main {
             long startTime = System.currentTimeMillis();
             for (int t = 0; t < 10; t++) {
                 for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
-                ParSort.sort(array, 0, array.length);
+                ParSort.sort(array, 0, array.length, myPool);
             }
             long endTime = System.currentTimeMillis();
             time = (endTime - startTime);
