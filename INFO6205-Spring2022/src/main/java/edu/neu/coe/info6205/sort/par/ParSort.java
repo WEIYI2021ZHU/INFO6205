@@ -10,8 +10,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 class ParSort {
 
-//    public static int cutoff = 1000;
-    public static int cutoff = 500; //update the initial cutoff value
+    public static int cutoff = 1000;
 
     public static void sort(int[] array, int from, int to, ForkJoinPool pool) {
         if (to - from < cutoff) Arrays.sort(array, from, to);
@@ -52,7 +51,7 @@ class ParSort {
                     System.arraycopy(array, from, result, 0, result.length);
                     sort(result, 0, to - from, pool);
                     return result;
-                }
+                }, pool
         );
     }
 }
